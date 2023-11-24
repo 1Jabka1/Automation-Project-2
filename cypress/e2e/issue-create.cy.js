@@ -65,4 +65,77 @@ describe('Issue create', () => {
       cy.get('[data-testid="form-field:title"]').should('contain', 'This field is required');
     });
   });
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  it('Pickle Rick Issue', () => {
+
+    cy.get('[data-testid="modal:issue-create"]').within(() => {
+      cy.get('button[type="submit"]').click();
+
+      //Adding a Title 
+      cy.get('input[name="title"]').type('Bug');
+
+      //Selecting issue as a Bug
+      cy.get('[data-testid="select:type"]').click();
+      cy.get('[data-testid="select-option:Bug"]')
+          .trigger('click');
+     
+      //Adding Description 
+      cy.get('.ql-editor').type('My bug description');
+
+      //Setting Priority
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid="select-option:Highest"]').click();
+
+      //Selecting "Pickle Rick" as Reporter
+      cy.get('[data-testid="select:reporterId"]').click();
+      cy.get('[data-testid="select-option:Pickle Rick"]').click();
+
+      //Creating issue via clicking "Create Issue"
+      cy.get('button[type="submit"]').click();
+    });
+  });
+
+  it('Baby Yoda Issue', () => {
+
+    cy.get('[data-testid="modal:issue-create"]').within(() => {
+      cy.get('button[type="submit"]').click();
+
+      //Adding a Title 
+      cy.get('input[name="title"]').type('Use the random data plugin for a single word.');
+
+      //NB! Issue type selected as Task by default, which makes it unable to choose without switching on any other issue type.   
+
+      //Selecting issue as a Task
+      //cy.get('[data-testid="select:type"]').click();
+      //cy.get('[data-testid="select-option:Story"]')
+          //.trigger('click');
+     
+      //Adding Description 
+      cy.get('.ql-editor').type('Use the random data plugin for several words.');
+
+      //Setting Priority
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid="select-option:Low"]').click();
+
+      //Selecting "Baby Yoda" as Reporter
+      cy.get('[data-testid="select:reporterId"]').click();
+      cy.get('[data-testid="select-option:Baby Yoda"]').click();
+
+      //Creating issue via clicking "Create Issue"
+      cy.get('button[type="submit"]').click();
+    });
+  });
 });
